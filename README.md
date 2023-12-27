@@ -64,8 +64,7 @@ try {
 }
 ```
 
-One gotcha is that if the `( use the client)` bit throws, the `await client.destroy()` won't run - unless you `try`/`catch` or `try`/(`catch`/)`finally`).
-This is a common gotcha in async code.
+Pending [Discord issue #10057: BaseClient/Client: Add support for 'using' keyword (Explicit Resource Management)](https://github.com/discordjs/discord.js/issues/10057), `DisposableDiscordClient` helps streamline code that creates and destroys a `Client` instance.
 
 ## Contributors
 
