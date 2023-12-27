@@ -10,7 +10,6 @@ module.exports = {
 		"plugin:n/recommended",
 		"plugin:perfectionist/recommended-natural",
 		"plugin:regexp/recommended",
-		"plugin:vitest/recommended",
 	],
 	overrides: [
 		{
@@ -48,7 +47,7 @@ module.exports = {
 			rules: {
 				"n/no-missing-import": [
 					"error",
-					{ allowModules: ["disposable-discord-client"] },
+					{ allowModules: ["discord.js", "disposable-discord-client"] },
 				],
 			},
 		},
@@ -84,14 +83,6 @@ module.exports = {
 			},
 		},
 		{
-			files: "**/*.test.ts",
-			rules: {
-				// These on-by-default rules aren't useful in test files.
-				"@typescript-eslint/no-unsafe-assignment": "off",
-				"@typescript-eslint/no-unsafe-call": "off",
-			},
-		},
-		{
 			extends: ["plugin:yml/standard", "plugin:yml/prettier"],
 			files: ["**/*.{yml,yaml}"],
 			parser: "yaml-eslint-parser",
@@ -119,17 +110,14 @@ module.exports = {
 		"@typescript-eslint",
 		"deprecation",
 		"jsdoc",
-		"no-only-tests",
 		"perfectionist",
 		"regexp",
-		"vitest",
 	],
 	reportUnusedDisableDirectives: true,
 	root: true,
 	rules: {
 		// These off/less-strict-by-default rules work well for this repo and we like them on.
 		"@typescript-eslint/no-unused-vars": ["error", { caughtErrors: "all" }],
-		"no-only-tests/no-only-tests": "error",
 
 		// These on-by-default rules don't work well for this repo and we like them off.
 		"no-case-declarations": "off",

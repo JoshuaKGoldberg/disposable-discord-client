@@ -8,7 +8,6 @@
 	<a href="#contributors" target="_blank"><img alt="All Contributors: 1 👪" src="https://img.shields.io/badge/all_contributors-1_👪-21bb42.svg" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 	<!-- prettier-ignore-end -->
-	<a href="https://codecov.io/gh/JoshuaKGoldberg/disposable-discord-client" target="_blank"><img alt="Codecov Test Coverage" src="https://codecov.io/gh/JoshuaKGoldberg/disposable-discord-client/branch/main/graph/badge.svg"/></a>
 	<a href="https://github.com/JoshuaKGoldberg/disposable-discord-client/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank"><img alt="Contributor Covenant" src="https://img.shields.io/badge/code_of_conduct-enforced-21bb42" /></a>
 	<a href="https://github.com/JoshuaKGoldberg/disposable-discord-client/blob/main/LICENSE.md" target="_blank"><img alt="License: MIT" src="https://img.shields.io/github/license/JoshuaKGoldberg/disposable-discord-client?color=21bb42"></a>
 	<img alt="Style: Prettier" src="https://img.shields.io/badge/style-prettier-21bb42.svg" />
@@ -23,10 +22,47 @@ npm i disposable-discord-client
 ```
 
 ```ts
-import { greet } from "disposable-discord-client";
+import { DisposableClient } from "disposable-discord-client";
 
-greet("Hello, world! 💖");
+await using client = new DisposableClient(/* ... */);
+
+await client.login();
 ```
+
+`DisposableClient` takes all the same type and value parameters as `Client`.
+
+In fact, its implementation is small enough to fit here!
+
+```ts
+import { Client } from "discord.js";
+
+export class DisposableClient<
+	Ready extends boolean = boolean,
+> extends Client<Ready> {
+	async [Symbol.asyncDispose]() {
+		await this.destroy();
+	}
+}
+```
+
+## What?
+
+[Explicit Resource Management](https://github.com/tc39/proposal-explicit-resource-management) is a TC39 proposal to add explicit syntax for situations where a resource should have some method called upon disposal.
+It's stage 3 now and [supported in TypeScript >=5.2](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management).
+
+The [discord.js `Client` class](https://discord.js.org/docs/packages/discord.js/main/Client:Class) is a good example of a disposable resource.
+When a `Client` instance is no longer needed, its [`destroy()`](https://discord.js.org/docs/packages/discord.js/main/Client:Class#destroy) should generally be called:
+
+```ts
+try {
+	const client = new Client(/* ... */);
+	await client.login();
+} finally {
+	await client.destroy();
+}
+```
+
+One gotcha is that if the `( use the client)` bit throws, the `await client.destroy()` won't run - unless you `try`/`catch` or `try`/(`catch`/)`finally`). This is a common gotcha in async code.
 
 ## Contributors
 
