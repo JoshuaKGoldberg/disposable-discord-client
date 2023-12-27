@@ -64,7 +64,8 @@ try {
 }
 ```
 
-One gotcha is that if the `( use the client)` bit throws, the `await client.destroy()` won't run - unless you `try`/`catch` or `try`/(`catch`/)`finally`). This is a common gotcha in async code.
+One gotcha is that if the `( use the client)` bit throws, the `await client.destroy()` won't run - unless you `try`/`catch` or `try`/(`catch`/)`finally`).
+This is a common gotcha in async code.
 
 ## Contributors
 
