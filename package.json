@@ -1,6 +1,6 @@
 {
 	"name": "disposable-discord-client",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "An extension to the discord.js `Client` class with `[Symbol.asyncDispose]` added. 🚮",
 	"repository": {
 		"type": "git",
