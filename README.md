@@ -1,6 +1,8 @@
 <h1 align="center">Disposable Discord Client</h1>
 
-<p align="center">An extension to the discord.js `Client` class with `[Symbol.asyncDispose]` added. 🚮</p>
+<p align="center">
+	An extension to the discord.js <code>Client</code> class with <code>[Symbol.asyncDispose]</code> added. 🚮
+</p>
 
 <p align="center">
 	<!-- prettier-ignore-start -->
