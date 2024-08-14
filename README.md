@@ -1,5 +1,10 @@
 <h1 align="center">Disposable Discord Client</h1>
 
+👉 **This is built into by Discord.js now!**
+See [discordjs/discord.js#10063 feat: add support for using keyword on discord.js Client and WebSocketManager](https://github.com/discordjs/discord.js/pull/10063).
+
+---
+
 <p align="center">
 	An extension to the discord.js <code>Client</code> class with <code>[Symbol.asyncDispose]</code> added. 🚮
 </p>
